@@ -1,0 +1,26 @@
+name: Env Variable
+
+env:
+  WORKFLOW_VARIABLE: "Workflow variables can be accessed anywhere in the workflow"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      JOB_VARIABLE: "Job variables can only be accessed within the job itself"
+
+    steps:
+      - name: prints the environment variables
+        env:
+          STEP_VARIABLE: "Step variables can only be accessed within the step itself"
+        run: |
+          echo Here are my custom environment variables
+          echo ${{ env.WORKFLOW_VARIABLE }}
+          echo ${{ env.JOB_VARIABLE }}
+          echo ${{ env.STEP_VARIABLE }}
