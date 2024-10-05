@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Clone repo & checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.0
 
       - name: Install Node.js
-        uses: actions/setup-node@v2.4.0
+        uses: actions/setup-node@v4.0.4
         with:
           node-version: 14.x
 
@@ -29,7 +29,7 @@ jobs:
         run: npm run test
 
       - name: Upload production-ready build files as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.2.1-node20
         with:
           name: production
           path: ./build
@@ -41,13 +41,14 @@ jobs:
 
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.8
         with:
           name: production
           path: ./build
 
       - name: Deploy to Github pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v4.0.0
+
         with:
           target_branch: gh-pages
           build_dir: ./build
